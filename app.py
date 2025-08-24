@@ -7,6 +7,10 @@ from nltk.stem.porter import PorterStemmer
 
 ps = PorterStemmer()
 
+# Ensure required nltk data is available
+nltk.download('punkt')
+nltk.download('stopwords')
+
 # Text preprocessing function
 def transform_text(text):
     text = text.lower()
