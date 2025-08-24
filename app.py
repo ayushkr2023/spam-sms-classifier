@@ -5,27 +5,12 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
-# Initialize stemmer
 ps = PorterStemmer()
-
-# Cache nltk downloads so they don’t run every time
-@st.cache_resource
-def download_nltk_resources():
-    for resource in ["punkt", "stopwords"]:
-        try:
-            if resource == "punkt":
-                nltk.data.find("tokenizers/punkt")
-            else:
-                nltk.data.find("corpora/stopwords")
-        except LookupError:
-            nltk.download(resource)
-
-download_nltk_resources()
 
 # Text preprocessing function
 def transform_text(text):
     text = text.lower()
-    text = nltk.word_tokenize(text)
+    text = nltk.tokenize.wordpunct_tokenize(text)   # ✅ no punkt download needed
 
     y = []
     for i in text:
